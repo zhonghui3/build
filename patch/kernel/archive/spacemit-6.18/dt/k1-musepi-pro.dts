@@ -15,7 +15,6 @@
 
 / {
 	model = "SpacemiT MusePi Pro";
-	modules_usrload = "8852bs";
 
 	chosen {
 		bootargs = "earlycon=sbi console=ttyS0,115200n8 swiotlb=65536 rdinit=/init";
@@ -185,7 +184,7 @@
 
 	mclk-disable;
 
-	status = "okay";
+	status = "disabled";
 };
 
 /* MIPI CSI3 data line2,3 clk lane2 */
@@ -210,20 +209,17 @@
 
 &ccic0 {
 	power-domains = <&power K1X_PMU_ISP_PWR_DOMAIN>;
-
-	status = "okay";
+	status = "disabled";
 };
 
 &ccic1 {
 	power-domains = <&power K1X_PMU_ISP_PWR_DOMAIN>;
-
-	status = "okay";
+	status = "disabled";
 };
 
 &ccic2 {
 	power-domains = <&power K1X_PMU_ISP_PWR_DOMAIN>;
-
-	status = "okay";
+	status = "disabled";
 };
 
 &combphy {
@@ -232,11 +228,12 @@
 
 &cpp {
 	power-domains = <&power K1X_PMU_ISP_PWR_DOMAIN>;
+	status = "disabled";
 };
 
 &csiphy0 {
 
-	status = "okay";
+	status = "disabled";
 };
 
 &csiphy1 {
@@ -246,7 +243,7 @@
 
 &csiphy2 {
 	spacemit,bifmode-enable;
-	status = "okay";
+	status = "disabled";
 };
 
 &dpu_online2_dsi {
@@ -370,7 +367,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_camera1>;
 
-	status = "okay";
+	status = "disabled";
 };
 
 &gpio{
@@ -770,6 +767,7 @@
 
 &isp {
 	power-domains = <&power K1X_PMU_ISP_PWR_DOMAIN>;
+	status = "disabled";
 };
 
 &otg {
@@ -1004,12 +1002,11 @@
 	status = "okay";
 };
 
-/* &r_uart0 {
+&r_uart0 {
 	status = "okay";
 };
-*/
 
-/* SD */
+/* SD card */
 &sdhci0 {
 	pinctrl-names = "default","fast";
 	pinctrl-0 = <&pinctrl_mmc1>;
@@ -1188,4 +1185,5 @@
 
 &vi {
 	power-domains = <&power K1X_PMU_ISP_PWR_DOMAIN>;
+	status = "disabled";
 };
