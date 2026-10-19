@@ -1,0 +1,43 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Armbian K230 <dev@armbian.com>
+Date: Thu, 4 Sep 2026 00:00:00 +0000
+Subject: [PATCH] canaan: k230: add board device tree blobs to build list
+
+The K230 SDK ships board-specific DTS files (lckfb, 01studio, dongshanpi,
+gt6700, v3, alientek, bananapi, ...) but the ruyisdk kernel Makefile only
+builds the generic k230-canmv/k230d-canmv/k230-evb blobs. The SDK normally
+relies on buildroot's BR2_LINUX_KERNEL_INTREE_DTS_NAME to request a
+specific blob; without buildroot, "make dtbs" never builds the board
+specific ones.
+
+Add every K230 board DTS present in arch/riscv/boot/dts/canaan to the
+dtb- build list so the lckfb (and other) board DTBs are produced.
+
+Signed-off-by: Armbian K230 <dev@armbian.com>
+---
+ arch/riscv/boot/dts/canaan/Makefile | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+--- a/arch/riscv/boot/dts/canaan/Makefile
++++ b/arch/riscv/boot/dts/canaan/Makefile
+@@ -4,6 +4,19 @@
+ dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv.dtb
+ dtb-$(CONFIG_ARCH_CANAAN) += k230d-canmv.dtb
+ dtb-$(CONFIG_ARCH_CANAAN) += k230-evb.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-lckfb-lcd.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-lckfb-lcd-ili9881.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-lcd.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-01studio.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-01studio-lcd.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-01studio-emmc.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-01studio-emmc-lcd.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-dongshanpi.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-gt6700.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-v3.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230-canmv-v3-lcd.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += k230d-canmv-atk-dnk230d.dtb
++dtb-$(CONFIG_ARCH_CANAAN) += bananapi-canmv-k230d-zero.dtb
+ dtb-$(CONFIG_ARCH_CANAAN) += sipeed_maix_bit.dtb
+ dtb-$(CONFIG_ARCH_CANAAN) += sipeed_maix_dock.dtb
+ dtb-$(CONFIG_ARCH_CANAAN) += sipeed_maix_go.dtb
+
